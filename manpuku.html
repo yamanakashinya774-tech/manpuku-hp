@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO: 本庄市の地域キーワードを強化 -->
+<title>焼肉 万福亭 — 埼玉県本庄市の炭火焼肉・本格焼肉</title>
+<meta name="description" content="埼玉県本庄市けや木の焼肉店「万福亭」公式サイト。厳選されたお肉を炭火で。宴会のご予約承ります。駐車場完備。">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --char: #1a0a00;
+    --ember: #d35400;
+    --gold: #d4af37;
+    --smoke: #2c1a0e;
+    --ash: #f5f0e8;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--char);
+    color: var(--ash);
+    font-family: 'Shippori Mincho', serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    border-bottom: 1px solid rgba(211,84,0,0.3);
+    background: rgba(26,10,0,0.95);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--ash);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1200') center/cover;
+  }
+  .hero-eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: var(--ember);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    transition: 0.3s ease;
+  }
+  .btn-primary:hover { background: #e67e22; transform: translateY(-3px); }
+
+  section { padding: 8rem 5%; max-width: 1100px; margin: 0 auto; }
+  .section-label { color: var(--ember); font-size: 0.8rem; letter-spacing: 0.4em; display: block; margin-bottom: 1rem; }
+  .section-title { font-size: 2.5rem; margin-bottom: 3rem; border-bottom: 1px solid rgba(211,84,0,0.3); padding-bottom: 1rem; }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .menu-item {
+    background: rgba(44, 26, 14, 0.5);
+    padding: 2rem;
+    border: 1px solid rgba(211,84,0,0.1);
+  }
+  .menu-item h3 { color: var(--gold); margin-bottom: 1rem; }
+
+  .info-table { width: 100%; border-collapse: collapse; }
+  .info-table th, .info-table td { padding: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+  .info-table th { color: var(--gold); width: 30%; font-weight: normal; }
+
+  .map-container {
+    margin-top: 3rem;
+    border: 1px solid var(--smoke);
+    filter: grayscale(0.2);
+    line-height: 0;
+  }
+
+  footer {
+    background: #0d0500;
+    padding: 5rem 5% 3rem;
+    text-align: center;
+  }
+  .legal-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; color: rgba(245,240,232,0.4); text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">焼肉 万福亭</a>
+  <ul class="nav-links">
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#visit">店舗案内</a></li>
+    <li><a href="tel:0495-24-3456" style="color:var(--gold); font-weight:bold;">電話予約</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow">本庄市けや木　炭火焼肉</p>
+  <h1>万福亭</h1>
+  <p class="hero-sub">こだわりの肉と雰囲気を、炭火の香りと共に</p>
+  <a href="tel:0495-24-3456" class="btn-primary">お電話で予約する</a>
+</header>
+
+<section id="menu">
+  <span class="section-label">MENU</span>
+  <h2 class="section-title">メニュー</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <h3>和牛上カルビ</h3>
+      <p>当店自慢の逸品。とろける食感をお楽しみください。</p>
+      <p style="margin-top:1rem; font-weight:bold;">¥1,200〜</p>
+    </div>
+    <div class="menu-item">
+      <h3>和牛上タン塩</h3>
+      <p>絶妙な厚みでカット。炭火でさっと炙ってどうぞ。</p>
+      <p style="margin-top:1rem; font-weight:bold;">¥1,500〜</p>
+    </div>
+    <div class="menu-item">
+      <h3>極上ホルモン</h3>
+      <p>プリッとした食感がたまらない一品。</p>
+      <p style="margin-top:1rem; font-weight:bold;">¥1,500〜</p>
+    </div>
+    <div class="menu-item">
+      <h3>コリコリ</h3>
+      <p>ここでしか食べれない食感をご賞味あれ。</p>
+      <p style="margin-top:1rem; font-weight:bold;">¥1,500〜</p>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <span class="section-label">ACCESS</span>
+  <h2 class="section-title">店舗案内</h2>
+  <table class="info-table">
+    <tr><th>店名</th><td>焼肉 万福亭（まんぷくてい）</td></tr>
+    <tr><th>所在地</th><td>〒367-0042<br>埼玉県本庄市けや木３丁目２４−１０</td></tr>
+    <tr><th>電話番号</th><td><a href="tel:0495-24-3456" style="color:inherit; text-decoration:none;">0495-24-3456</a></td></tr>
+    <tr><th>営業時間</th><td>17:00 〜 22:00（L.O. 21:30）</td></tr>
+    <tr><th>定休日</th><td>毎週水曜日</td></tr>
+  </table>
+
+  <!-- 実際の住所に合わせたGoogleマップ -->
+  <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3215.3533285741024!2d139.18247077636605!3d36.230919372415175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601f200c86295555%3A0xe54e20790d0b000!2z54S86IKJ5LiH56aP5Lqt!5e0!3m2!1sja!2sjp!4v1714621500000!5m2!1sja!2sjp" 
+      width="100%" 
+      height="450" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<footer>
+  <a href="#" style="font-size:1.8rem; color:var(--gold); font-weight:900; text-decoration:none; display:block; margin-bottom:2rem;">焼肉 万福亭</a>
+  
+  <div class="legal-section">
+    <div id="privacy">
+      <strong>【プライバシーポリシー】</strong><br>
+      焼肉 万福亭は、お客様の個人情報を予約管理およびサービス提供の目的のみに使用し、適切に管理いたします。
+    </div>
+    <br>
+    <div id="law">
+      <strong>【特定商取引法に基づく表記】</strong><br>
+      販売業者：焼肉 万福亭<br>
+      所在地：埼玉県本庄市けや木３丁目２４−１０<br>
+      電話番号：0495-24-3456<br>
+      お支払方法：現金・paypay決済<br>
+      商品代金以外の料金：消費税（税込表示）
+    </div>
+    <p style="text-align:center; margin-top:3rem; opacity:0.5;">&copy; 2026 Yakiniku Manpukutei. All Rights Reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
