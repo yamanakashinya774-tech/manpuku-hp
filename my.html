@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAMANAKA SHINYA | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black:   #0A0A0A;
+            --white:   #F5F5F0;
+            --gray-1:  #1A1A1A;
+            --gray-2:  #2C2C2C;
+            --gray-3:  #4A4A4A;
+            --gray-4:  #8A8A8A;
+            --gray-5:  #C4C4C4;
+            --gray-6:  #E0E0E0;
+            --accent:  #E8E8E0;
+            --mono:    'DM Mono', monospace;
+            --display: 'Bebas Neue', cursive;
+            --header:  'Archivo Black', sans-serif;
+            --body:    'Noto Sans JP', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--body);
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.8;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ─── CUSTOM CURSOR ─── */
+        .cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 12px; height: 12px;
+            background: var(--white);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s, width 0.25s, height 0.25s, background 0.25s;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(245,245,240,0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.12s ease, width 0.3s, height 0.3s;
+        }
+        .cursor.hover { width: 20px; height: 20px; }
+
+        /* ─── NOISE OVERLAY ─── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.5;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 800;
+            padding: 22px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .logo {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            color: var(--gray-4);
+        }
+        .logo span { color: var(--white); }
+
+        nav ul { display: flex; gap: 36px; }
+        nav a {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            color: var(--gray-4);
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0;
+            width: 0; height: 1px;
+            background: var(--white);
+            transition: width 0.3s;
+        }
+        nav a:hover { color: var(--white); }
+        nav a:hover::after { width: 100%; }
+
+        /* ─── HERO ─── */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 48px 64px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--display);
+            font-size: clamp(100px, 18vw, 260px);
+            letter-spacing: -0.02em;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .hero-number {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            color: var(--gray-4);
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+        }
+        .hero-name {
+            font-family: var(--display);
+            font-size: clamp(60px, 10vw, 140px);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            margin-bottom: 32px;
+        }
+        .hero-name em {
+            font-style: normal;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--gray-5);
+        }
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .hero-lead {
+            font-size: 0.9rem;
+            color: var(--gray-4);
+            max-width: 380px;
+            line-height: 1.9;
+        }
+        .typing-wrap {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--gray-5);
+            text-align: right;
+        }
+        .typed-cursor { color: var(--white); animation: blink 0.7s infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        .scroll-indicator {
+            position: absolute;
+            right: 48px;
+            bottom: 64px;
+            writing-mode: vertical-rl;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            color: var(--gray-4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--gray-4), transparent);
+        }
+
+        /* ─── DIVIDER ─── */
+        .section-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 0 48px;
+        }
+
+        /* ─── SECTION BASE ─── */
+        section { padding: 120px 48px; }
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.3em;
+            color: var(--gray-4);
+            text-transform: uppercase;
+            margin-bottom: 64px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-label::before {
+            content: '';
+            width: 40px; height: 1px;
+            background: var(--gray-3);
+        }
+
+        /* ─── ABOUT ─── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .about-left {
+            position: sticky;
+            top: 120px;
+        }
+        .about-heading {
+            font-family: var(--display);
+            font-size: clamp(56px, 6vw, 88px);
+            line-height: 0.9;
+            color: var(--white);
+            margin-bottom: 40px;
+        }
+        .avatar-box {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+            background: var(--gray-1);
+        }
+        .avatar-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gray-2) 0%, transparent 60%);
+        }
+
+        .about-text h3 {
+            font-family: var(--header);
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+        .about-text p {
+            font-size: 0.92rem;
+            color: var(--gray-4);
+            line-height: 2.0;
+            margin-bottom: 20px;
+        }
+        .about-tag {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--gray-4);
+            margin: 4px 4px 4px 0;
+            transition: all 0.3s;
+        }
+        .about-tag:hover {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        /* ─── SKILLS ─── */
+        .skills { background: var(--gray-1); }
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .skill-item {
+            padding: 40px 36px;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s;
+        }
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gray-2);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
+        }
+        .skill-item:hover::before { transform: translateY(0); }
+        .skill-item > * { position: relative; z-index: 1; }
+
+        .skill-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        .skill-item:hover .skill-emoji { filter: grayscale(0%); }
+
+        .skill-name {
+            font-family: var(--header);
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .skill-desc {
+            font-size: 0.82rem;
+            color: var(--gray-4);
+            line-height: 1.8;
+        }
+        .skill-num {
+            position: absolute;
+            top: 20px; right: 24px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--gray-3);
+            letter-spacing: 0.15em;
+        }
+
+        /* ─── SNS ─── */
+        .sns { background: var(--black); }
+        .sns-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .sns-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .sns-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gray-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
+        }
+        .sns-link:hover::before { transform: scaleX(1); }
+        .sns-link > * { position: relative; z-index: 1; }
+
+        .sns-left { display: flex; align-items: center; gap: 28px; }
+        .sns-emoji { font-size: 1.8rem; filter: grayscale(100%); transition: filter 0.3s; }
+        .sns-link:hover .sns-emoji { filter: grayscale(0%); }
+
+        .sns-name {
+            font-family: var(--display);
+            font-size: 2rem;
+            color: var(--white);
+            letter-spacing: 0.05em;
+        }
+        .sns-arrow {
+            font-family: var(--mono);
+            font-size: 1.2rem;
+            color: var(--gray-4);
+            transition: transform 0.3s, color 0.3s;
+        }
+        .sns-link:hover .sns-arrow { transform: translate(6px, -6px); color: var(--white); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        footer p {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--gray-4);
+            letter-spacing: 0.12em;
+        }
+
+        /* ─── FADE-IN ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            header { padding: 18px 24px; }
+            .hero { padding: 0 24px 48px; }
+            .hero-name { font-size: clamp(48px, 12vw, 80px); }
+            .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .typing-wrap { text-align: left; }
+            .scroll-indicator { display: none; }
+            section { padding: 80px 24px; }
+            .section-divider { margin: 0 24px; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-left { position: static; }
+            .skill-grid { grid-template-columns: 1fr 1fr; }
+            footer { padding: 28px 24px; flex-direction: column; gap: 12px; }
+        }
+        @media (max-width: 560px) {
+            .skill-grid { grid-template-columns: 1fr; }
+            nav ul { gap: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ─── HEADER ─── -->
+    <header>
+        <div class="logo">YS.<span>PORTFOLIO</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#sns">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ─── HERO ─── -->
+    <section class="hero">
+        <div class="hero-bg-text">PORTFOLIO</div>
+
+        <div class="hero-number">— 001 / WEB DEVELOPER</div>
+
+        <h1 class="hero-name">
+            YAMANAKA<br>
+            <em>SHINYA</em>
+        </h1>
+
+        <div class="hero-bottom">
+            <p class="hero-lead">
+                灰色（冷静）と黄色（情熱）を使い分ける、<br>
+                自称・敏腕クリエイター。😎<br>
+                バグを見つけたら<span style="color:var(--gray-5)">「おっ、新しい友達か？」</span><br>
+                と話しかけるようにしています。👾
+            </p>
+            <div class="typing-wrap">
+                <span id="typed"></span><span class="typed-cursor">|</span>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">SCROLL</div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ─── ABOUT ─── -->
+    <section id="about">
+        <div class="section-label">About Me</div>
+        <div class="about-grid">
+            <div class="about-left reveal">
+                <h2 class="about-heading">WHO<br>AM I?</h2>
+                <div class="avatar-box">👨🏼‍💻</div>
+            </div>
+            <div class="about-text reveal">
+                <h3>山中 伸也（Yamanaka Shinya）🐈‍⬛</h3>
+
+                <p>
+                    【好きなもの】<br>
+                    定時退社 🏃‍♂️💨（世界で一番美しい日本語だと思っています）
+                </p>
+                <p>
+                    【嫌いなもの】<br>
+                    仕様変更 🚫（聞くと耳から煙が出ます。もはや仕様ではなく「試練」だと思ってます）
+                </p>
+                <p>
+                    【最近の悩み】<br>
+                    本棚を色別に並べたら、見た目は最高なのに「あの本どこだっけ？」と毎日迷子になっています。もはや本棚というより、部屋の中にある「巨大なグラデーションの壁」です。🔍🎨
+                </p>
+                <p style="margin-top:32px; color: var(--gray-5);">
+                    気軽に絡んでください！たまにウィットに富んだジョークを飛ばしますが、スルーされた時の復旧作業（メンタルケア）はセルフサービスでお願いします。🍌💻
+                </p>
+
+                <div style="margin-top: 40px;">
+                    <span class="about-tag">PHP 🐘</span>
+                    <span class="about-tag">JavaScript 💛</span>
+                    <span class="about-tag">CSS 🎨</span>
+                    <span class="about-tag">Git 🐙</span>
+                    <span class="about-tag">SQL 🗄️</span>
+                    <span class="about-tag">Sleep 💤</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ─── SKILLS ─── -->
+    <section id="skills" class="skills">
+        <div class="section-label">Skills &amp; Tools</div>
+        <div class="skill-grid">
+
+            <div class="skill-item reveal">
+                <span class="skill-num">01</span>
+                <span class="skill-emoji">🐘</span>
+                <div class="skill-name">PHP</div>
+                <div class="skill-desc">最近は象さんと意思疎通ができるようになってきました。</div>
+            </div>
+
+            <div class="skill-item reveal" style="transition-delay:0.08s">
+                <span class="skill-num">02</span>
+                <span class="skill-emoji">💛</span>
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-desc">黄色といえばJS。片思い歴は長いです。</div>
+            </div>
+
+            <div class="skill-item reveal" style="transition-delay:0.16s">
+                <span class="skill-num">03</span>
+                <span class="skill-emoji">🎨</span>
+                <div class="skill-name">CSS</div>
+                <div class="skill-desc">1pxのズレで夜も眠れなくなる呪いにかかっています。</div>
+            </div>
+
+            <div class="skill-item reveal" style="transition-delay:0.24s">
+                <span class="skill-num">04</span>
+                <span class="skill-emoji">🐙</span>
+                <div class="skill-name">Git</div>
+                <div class="skill-desc">タコ先生。過去を消し去る魔法（Force Push）は禁忌。</div>
+            </div>
+
+            <div class="skill-item reveal" style="transition-delay:0.32s">
+                <span class="skill-num">05</span>
+                <span class="skill-emoji">🗄️</span>
+                <div class="skill-name">SQL</div>
+                <div class="skill-desc">情報の整理整頓。現実の部屋もこれくらい綺麗なら。</div>
+            </div>
+
+            <div class="skill-item reveal" style="transition-delay:0.40s">
+                <span class="skill-num">06</span>
+                <span class="skill-emoji">💤</span>
+                <div class="skill-name">睡眠</div>
+                <div class="skill-desc">最も重要なエンジニアスキル。質より量派。</div>
+            </div>
+
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ─── SNS ─── -->
+    <section id="sns" class="sns">
+        <div class="section-label">Get In Touch</div>
+        <div class="sns-inner">
+            <a href="#" class="sns-link reveal">
+                <div class="sns-left">
+                    <span class="sns-emoji">🐦</span>
+                    <span class="sns-name">TWITTER</span>
+                </div>
+                <span class="sns-arrow">↗</span>
+            </a>
+            <a href="#" class="sns-link reveal" style="transition-delay:0.08s">
+                <div class="sns-left">
+                    <span class="sns-emoji">💻</span>
+                    <span class="sns-name">GITHUB</span>
+                </div>
+                <span class="sns-arrow">↗</span>
+            </a>
+            <a href="#" class="sns-link reveal" style="transition-delay:0.16s">
+                <div class="sns-left">
+                    <span class="sns-emoji">📸</span>
+                    <span class="sns-name">INSTAGRAM</span>
+                </div>
+                <span class="sns-arrow">↗</span>
+            </a>
+            <a href="#" class="sns-link reveal" style="transition-delay:0.24s">
+                <div class="sns-left">
+                    <span class="sns-emoji">📖</span>
+                    <span class="sns-name">ZENN</span>
+                </div>
+                <span class="sns-arrow">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer>
+        <p>© 2025 YAMANAKA SHINYA</p>
+        <p>BUILT WITH 💡 AND PHP</p>
+    </footer>
+
+    <script>
+        // ─── CUSTOM CURSOR ───
+        const cursor     = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top  = mouseY + 'px';
+        });
+
+        (function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top  = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+
+        document.querySelectorAll('a, button, .skill-item, .about-tag').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // ─── TYPING EFFECT ───
+        const strings = [
+            'Webデベロッパー 💻',
+            'カレーを愛し、カレーに愛された男 🍛',
+            'MacBookのキーボード掃除が趣味 ⌨️',
+            '深夜のデバッグ、朝の絶望 🌅',
+            'だいたいコーヒーで動いてる ☕️'
+        ];
+        const el = document.getElementById('typed');
+        let si = 0, ci = 0, del = false;
+
+        function type() {
+            const s = strings[si];
+            el.textContent = del ? s.substring(0, ci - 1) : s.substring(0, ci + 1);
+            del ? ci-- : ci++;
+            let speed = del ? 40 : 95;
+            if (!del && ci === s.length)  { del = true; speed = 2200; }
+            if (del  && ci === 0)          { del = false; si = (si + 1) % strings.length; speed = 500; }
+            setTimeout(type, speed);
+        }
+        type();
+
+        // ─── SCROLL REVEAL ───
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
